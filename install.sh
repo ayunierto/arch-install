@@ -51,3 +51,19 @@ sudo pacman -S --noconfirm zip unzip tar p7zip
 
 
 
+# Instalacion de terminal zsh
+sudo pacman -S zsh
+sudo usermod --shell /usr/bin/zsh hawk
+agregando la terminal zsh al usuario hawk
+paru -S zsh-syntax-highlighting zsh-autosuggestions # Agregando plugins a zsh
+# Instalar locate pra saber ubicacion de los archivos en el sistema
+sudo pacman -S locate
+sudo updatedb # Actualizar base de datos de locate
+sudo mkdir -p /usr/share/zsh-sudo # Agregando carpeta de configuracion para zsh-sudo
+sudo chown hawk:hawk /usr/share/zsh-sudo # Cambiando permisos a la carpeta 
+cd /usr/share/zsh-sudo
+sudo pacman -S wget
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh # Descargando plugin
+# Instalar lsd y bat para mejorar la experiencia de de los comandos ls y cat
+sudo pacman -S lsd bat
+sudo pacman -S picom
