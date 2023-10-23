@@ -2,6 +2,7 @@
 #
 ln -sf /usr/share/zoneinfo/America/Lima /etc/localtime
 hwclock --systohc
+echo "es_PE.UTF-8 UTF-8" > /etc/locale.gen
 vim /etc/locale.gen 
 locale-gen 
 echo "LANG=es_PE.UTF-8" > /etc/locale.conf
@@ -21,3 +22,4 @@ grub-install --target=x86_64-efi --efi-directory=/boot
 os-prober 
 grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S networkmanager wpa_supplicant
+reboot now
