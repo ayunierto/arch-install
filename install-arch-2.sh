@@ -11,10 +11,10 @@ echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1 localhost" >> /etc/hosts 
 echo "127.0.0.1 laptop.localhost localhost" >> /etc/hosts 
 cat /etc/hosts
-echo "Clave para el usurio root"
+echo "Clave para el usuario root"
 passwd 
 useradd -m hawk
-echo "Clave para el usurio hawk"
+echo "Clave para el usuario hawk"
 passwd hawk
 usermod -aG wheel hawk
 pacman -S sudo
