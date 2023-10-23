@@ -11,8 +11,10 @@ echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1 localhost" >> /etc/hosts 
 echo "127.0.0.1 laptop.localhost localhost" >> /etc/hosts 
 cat /etc/hosts
+echo "Clave para el usurio root"
 passwd 
 useradd -m hawk
+echo "Clave para el usurio hawk"
 passwd hawk
 usermod -aG wheel hawk
 pacman -S sudo
@@ -22,4 +24,5 @@ grub-install --target=x86_64-efi --efi-directory=/boot
 os-prober 
 grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S networkmanager wpa_supplicant
+exit
 reboot now
