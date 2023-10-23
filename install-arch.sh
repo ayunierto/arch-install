@@ -1,26 +1,26 @@
 #!/bin/bash
 
 
-echo "A continuacion se formatearan las particiones sda1, sda2, sda3."
+echo "A continuacion se formatearan las particiones sda5, sda6."
 echo "Tenga mucha precaucion"
 echo "Presiona una tecla para continuar..."
 read -n 1 -s
 
 # Formateando particiones
 #
-mkfs.ext4 /dev/sda2
-mkswap /dev/sda3
-mkfs.fat -F 32 /dev/sda1
+mkfs.ext4 /dev/sda6
+#mkswap /dev/sda3
+mkfs.fat -F 32 /dev/sda5
 
 # Montar los sistemas de archivos
 #
-mount /dev/sda2 /mnt 
-mount --mkdir /dev/sda1 /mnt/boot 
-swapon /dev/sda3
+mount /dev/sda6 /mnt 
+mount --mkdir /dev/sda5 /mnt/boot 
+#swapon /dev/sda3
 
 # Instalacion
 #
-pacstrap /mnt base linux linux-firmware base-devel neovim  
+pacstrap /mnt base linux linux-firmware base-devel vim  
 
 # Configurar sistema
 #
