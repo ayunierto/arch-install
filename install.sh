@@ -16,14 +16,13 @@ sudo pacman -Syu
 sudo pacman -S --noconfirm awesome
 sudo pacman -S --noconfirm lightdm lightdm-gtk-greeter
 sudo systemctl enable lightdm
-echo "exec awesome" >> ~/.xinitrc
 
 # Configurando gestor de ventanas
 #
-mkdir ~/.config/awesome
+mkdir -p ~/.config/awesome
 #cp /etc/xdg/awesome/rc.lua ~/.config/awesome/		# Copiando configuracion por defecto
 #cp /usr/share/awesome/themes/default/theme.lua ~/.config/awesome/	# Copiando tema por defecto
-#sed -i 's/terminal = "xterm"/terminal = "kitty"/g' ~/.config/awesome/rc.lua	#cambiando terminal por defecto
+sed -i 's/terminal = "xterm"/terminal = "kitty"/g' ~/.config/awesome/rc.lua	#cambiando terminal por defecto
 #sed -i 's/nano/nvim/g' ~/.config/awesome/rc.lua
 #sed -i "s#beautiful\.init(gears\.filesystem\.get_themes_dir() \.\. \"default/theme\.lua\")#beautiful.init(\"$HOME/.config/awesome/theme.lua\")#g" ~/.config/awesome/rc.lua	# Cambiando ubicacion de tema por defecto
 
