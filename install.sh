@@ -65,7 +65,7 @@ sudo pacman -S wget
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh # Descargando plugin
 # Instalar lsd y bat para mejorar la experiencia de de los comandos ls y cat
 sudo pacman -S lsd bat
-sudo pacman -S picom
+
 # Instalacion de powerlevel10k. tema para la terminal zsh
 'https://github.com/romkatv/powerlevel10k#manual'
 # Instalar extencion de vimium para google-chrome
