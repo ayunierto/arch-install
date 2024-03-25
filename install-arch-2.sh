@@ -17,7 +17,7 @@ useradd -m hawk
 echo "Clave para el usuario hawk"
 passwd hawk
 usermod -aG wheel hawk
-pacman -S sudo
+pacman -S sudo vim
 vim /etc/sudoers
 pacman -S grub efibootmgr os-prober
 grub-install --target=x86_64-efi --efi-directory=/boot
