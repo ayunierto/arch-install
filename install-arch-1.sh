@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-echo "A continuacion se formatearan las particiones sda5, sda6."
+echo "A continuacion se formatearan las particiones sda3, sda4, sda7."
 echo "Tenga mucha precaucion"
 echo "Presiona una tecla para continuar..."
 read -n 1 -s
@@ -9,15 +9,15 @@ read -n 1 -s
 # Utilizar cfdisk para particionar 
 # Formateando particiones
 #
-mkfs.ext4 /dev/sda6
-#mkswap /dev/sda3
-mkfs.fat -F 32 /dev/sda5
+mkfs.ext4 /dev/sda7
+mkswap /dev/sda4
+mkfs.fat -F 32 /dev/sda3
 
 # Montar los sistemas de archivos
 #
-mount /dev/sda6 /mnt 
-mount --mkdir /dev/sda5 /mnt/boot 
-#swapon /dev/sda3
+mount /dev/sda7 /mnt 
+mount --mkdir /dev/sda3 /mnt/boot 
+swapon /dev/sda4
 
 # Instalacion
 #
