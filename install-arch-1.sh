@@ -6,6 +6,7 @@ echo "Tenga mucha precaucion"
 echo "Presiona una tecla para continuar..."
 read -n 1 -s
 
+# Utilizar cfdisk para particionar 
 # Formateando particiones
 #
 mkfs.ext4 /dev/sda6
