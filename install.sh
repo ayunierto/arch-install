@@ -53,7 +53,7 @@ sudo pacman -S --noconfirm zip unzip tar p7zip
 # Instalacion de terminal zsh
 sudo pacman -S zsh
 sudo usermod --shell /usr/bin/zsh hawk
-agregando la terminal zsh al usuario hawk
+# agregando la terminal zsh al usuario hawk
 sudo pacman-S zsh-syntax-highlighting zsh-autosuggestions # Agregando plugins a zsh
 # Instalar locate pra saber ubicacion de los archivos en el sistema
 sudo pacman -S locate
