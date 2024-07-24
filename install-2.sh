@@ -18,8 +18,9 @@ echo "Clave para el usuario hawk"
 passwd hawk
 usermod -aG wheel hawk
 nvim /etc/sudoers
-pacman -S grub efibootmgr
+pacman -S grub efibootmgr os-prober
 grub-install --target=x86_64-efi --efi-directory=/boot
+os-prober
 grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S networkmanager wpa_supplicant
 exit
