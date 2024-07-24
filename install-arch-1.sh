@@ -8,20 +8,24 @@ read -n 1 -s
 
 # Utilizar cfdisk para particionar 
 # Formateando particiones
-#
+# para crear pariticiones utilizar el comando cfdisk
+# crear una partición de 1G como EFI System
+# crear una partición del tamaño de la memoria ram tipo Linux Swap
+# crear una particion con el tamaño deseado para el sistema como Linux filesystem 
+
 mkfs.ext4 /dev/sda7
-mkswap /dev/sda4
-mkfs.fat -F 32 /dev/sda3
+mkswap /dev/sda6
+mkfs.fat -F 32 /dev/sda5
 
 # Montar los sistemas de archivos
 #
 mount /dev/sda7 /mnt 
-mount --mkdir /dev/sda3 /mnt/boot 
-swapon /dev/sda4
+mount --mkdir /dev/sda5 /mnt/boot 
+swapon /dev/sda6
 
 # Instalacion
 #
-pacstrap /mnt base linux linux-firmware base-devel vim  
+pacstrap /mnt base linux linux-firmware base-devel neovim  
 
 # Configurar sistema
 #
