@@ -2,9 +2,6 @@
 # Script para la instalacion de arch linux con gestor de ventanas awesome
 # e inicio de sesion con LightDM
 
-# Conectandose a internet
-sudo systemctl enable NetworkManager 
-sudo systemctl start NetworkManager
 #nmcli device wifi connect "Net05" password "A&B&Dios"
 
 # Actualizando sistema
