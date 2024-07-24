@@ -30,7 +30,7 @@ sudo pacman -S --noconfirm kitty neofetch zip unzip tar p7zip wget
 
 # COnfiguranto kitty
 mkdir -p ~/.config/kitty
-echo "font_size 11" >> ~/.config/kitty.conf
+echo "font_size 11" >> ~/.config/kitty/kitty.conf
 
 # Instalando gestor de aquetes paru
 #
