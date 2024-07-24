@@ -23,5 +23,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot
 os-prober
 grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S networkmanager wpa_supplicant
+# habilitando conexión a internet
+sudo systemctl enable NetworkManager 
+sudo systemctl start NetworkManager
 exit
-reboot now
