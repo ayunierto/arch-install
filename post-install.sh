@@ -5,7 +5,7 @@
 # Conectandose a internet
 sudo systemctl enable NetworkManager 
 sudo systemctl start NetworkManager
-nmcli device wifi connect "Net05" password "A&B&Dios"
+#nmcli device wifi connect "Net05" password "A&B&Dios"
 
 # Actualizando sistema
 #
