@@ -1,0 +1,140 @@
+#!/bin/bash
+#
+# Script para instalacion del sistema operativo Arch.
+# Creado por aytodev
+#
+
+opc=0
+
+while [[ $opc -ne 4 ]]; do
+  clear
+  echo "Bienvenido al instalador de Arch (creado por aytodev)"
+  echo ""
+  echo "1. Particionado de discos. (cfdisk)"
+  echo "2. Elegir particiones e instalar."
+  echo "3. Salir"
+  echo ""
+  read -p "Selecciona una opcion: " opc
+
+  case "$opc" in
+    1)  
+      sudo cfdisk
+      clear
+      echo "Saliendo del particionador..."
+      sleep 3
+    ;;
+    2)
+        clear
+
+        while true; do
+          clear  
+          echo "Lista de particiones:"
+          #partitions=$(echo $(lsblk | grep 'part' | sed 's/├─//g' | sed 's/└─//g' | awk '{print $1}'))
+          #echo "$partitions"
+          echo "$(sudo fdisk -l | grep '^/dev/' | awk '{print $1, $5, $6, $7, $8, $9}')"
+          echo ""
+          read -p "Selecciona la particion para root '/' (Ejemplo: sda3): " root_part
+
+          # Validar la entrada
+          if lsblk -e 7 -o NAME -n | grep "$root_part"; then
+            echo ""
+          else
+            echo "La partición '$root_part' no existe."
+            echo ""
+            echo "  1. Volver a intentar"
+            echo "  2. Salir"
+            read -p "Que desea hacer: " option
+
+            case "$option" in
+              1) continue ;;
+              2) echo "Saliendo..."
+                 break ;;
+              *) echo "Opción inválida, vuelva a intentar." ;;
+            esac
+          fi
+
+          read -p "Selecciona la partición boot '/boot' (Ejemplo sda1): " boot_part
+          # Validar la entrada
+          if lsblk -e 7 -o NAME -n | grep "$boot_part"; then
+            echo "La particion introducida es correcta."
+          else
+            echo "La partición '$boot_part' no existe."
+            echo ""
+            echo "  1. Volver a intentar"
+            echo "  2. Salir"
+            read -p "Que desea hacer: " option
+
+            case "$option" in
+              1) continue ;;
+              2) echo "Saliendo..."
+                 break ;;
+              *) echo "Opción inválida, vuelva a intentar." ;;
+            esac
+          fi
+ 
+          read -p "Selecciona la partición swap (Ejemplo: sda2): " swap_part
+          # Validar la entrada
+          if lsblk -e 7 -o NAME -n | grep "$swap_part"; then
+            echo "La particion introducida es correcta."
+            sleep 3
+            break 
+          else
+            echo "La partición '$swap_part' no existe."
+            echo ""
+            echo "  1. Volver a intentar"
+            echo "  2. Salir"
+            read -p "Que desea hacer: " option
+
+            case "$option" in
+              1) continue ;;
+              2) echo "Saliendo..."
+                 break ;;
+              *) echo "Opción inválida, vuelva a intentar." ;;
+            esac
+          fi
+        done
+
+        echo ""
+        clear
+        echo "Las particiones $root_part, $boot_part y $swap_part seran formateadas."
+        echo "Presione Ctrl+C para cancelar"
+        sleep 5
+      
+      # Formatear particiones 
+      #mkfs.ext4 /dev/$root_part
+      #mkswap /dev/$swap_part
+      #mkfs.fat -F 32 /dev/$boot_part
+
+      #mkfs.ext4 /dev/sda7
+      #mkswap /dev/sda6
+      #mkfs.fat -F 32 /dev/sda5
+
+      # Montar los sistemas de archivos
+      #
+      #mount /dev/sda7 /mnt 
+      #mount --mkdir /dev/sda5 /mnt/boot 
+      #swapon /dev/sda6
+
+      # Instalacion
+      #
+      #pacstrap /mnt base linux linux-firmware base-devel neovim  
+
+      # Configurar sistema
+      #
+      #genfstab -U /mnt >> /mnt/etc/fstab 
+      #arch-chroot /mnt
+
+      sleep 3
+    ;;
+    3) echo "Saliendo del programa de instalacion"
+      sleep 3
+    ;;
+    *) echo "$opc no es una opcion valida"
+      sleep 3
+    ;;
+  esac
+  
+done
+
+
+

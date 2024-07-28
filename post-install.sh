@@ -61,9 +61,20 @@ sudo pacman -S zsh-syntax-highlighting zsh-autosuggestions # Agregando plugins a
 sudo pacman -S lsd bat
 
 # Instalacion de powerlevel10k. tema para la terminal zsh
+cd ~/
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 #'https://github.com/romkatv/powerlevel10k#manual'
 # Instalar extencion de vimium para google-chrome
 
 # Instalar fzf para buscar rapidamente archivos. Presionar Ctrl + T para abrir. Ejemplo "cat Ctrl + T".
 #git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 #~/.fzf/install
+
+
+
+# Agregando tema dracula
+sudo git clone https://github.com/dracula/gtk.git /usr/share/themes/Dracula
+
+# Instalar adminsitrador de archivos
+sudo pacman -S thunar
