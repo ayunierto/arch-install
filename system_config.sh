@@ -51,5 +51,9 @@ system_config() {
 	
 	arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm kitty neofetch zip unzip tar p7zip wget zsh zsh-syntax-highlighting zsh-autosuggestions lsd bat neovim firefox"
 	arch-chroot /mnt /bin/bash -c "usermod --shell /usr/bin/zsh $username"
+ 	arch-chroot /mnt /bin/bash -c "git clone https://github.com/NvChad/starter ~/.config/nvim && nvim"
+
+  	
+   
 
 }
