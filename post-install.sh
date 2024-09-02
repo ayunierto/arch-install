@@ -1,36 +1,8 @@
 #!/bin/bash
-# Script para la instalacion de arch linux con gestor de ventanas awesome
-# e inicio de sesion con LightDM
 
-# Conectandose a internet con wifi
-#nmcli device wifi connect "Net05" password "A&B&Dios"
-
-# Actualizando sistema
-sudo pacman -Syu
-
-# Instalar gestor de ventanas y de inicio de sesion
-sudo pacman -S --noconfirm awesome
-sudo pacman -S lightdm lightdm-gtk-greeter
-sudo systemctl enable lightdm
-
-# Configurando gestor de ventanas
-mkdir -p ~/.config/awesome
-cp /etc/xdg/awesome/rc.lua ~/.config/awesome/					# Copiando configuracion por defecto
-cp /usr/share/awesome/themes/default/theme.lua ~/.config/awesome/		# Copiando tema por defecto
-sed -i 's/terminal = "xterm"/terminal = "kitty"/g' ~/.config/awesome/rc.lua	# Cambiando terminal por defecto
-sed -i 's/nano/nvim/g' ~/.config/awesome/rc.lua
-sed -i "s#beautiful\.init(gears\.filesystem\.get_themes_dir() \.\. \"default/theme\.lua\")#beautiful.init(\"$HOME/.config/awesome/theme.lua\")#g" ~/.config/awesome/rc.lua	# Cambiando ubicacion de tema por defecto
-
-# Instalando audio
-sudo pacman -S --noconfirm alsa-utils pulseaudio pulseaudio-alsa pavucontrol
-sudo usermod -aG audio hawk
-
-# Instalando algunos paquetes necesarios
-sudo pacman -S --noconfirm kitty neofetch zip unzip tar p7zip wget
-
-# COnfiguranto kitty
-mkdir -p ~/.config/kitty
-echo "font_size 11" >> ~/.config/kitty/kitty.conf
+cd ~/
+git clone https://github.com/ayunierto/arch-config.git
+cp -r ~/arch-config/.* ~/
 
 # Instalando gestor de aquetes paru
 #
@@ -44,7 +16,7 @@ echo "font_size 11" >> ~/.config/kitty/kitty.conf
 sudo pacman -S zsh
 
 # Agregando la terminal zsh al usuario hawk
-sudo usermod --shell /usr/bin/zsh hawk
+sudo usermod --shell /usr/bin/zsh $USER
 
 # Plugins para mejorar zsh
 sudo pacman -S zsh-syntax-highlighting zsh-autosuggestions # Agregando plugins a zsh
