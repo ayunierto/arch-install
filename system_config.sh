@@ -25,7 +25,7 @@ system_config() {
 	arch-chroot /mnt /bin/bash -c "passwd $username"
 	arch-chroot /mnt /bin/bash -c "usermod -aG wheel $username"
 	
-	arch-chroot /mnt /bin/bash -c "echo '%sudo All=(ALL:ALL) ALL' >> /etc/sudoers"
+	arch-chroot /mnt /bin/bash -c "echo '%wheel All=(ALL:ALL) ALL' >> /etc/sudoers"
 
 	arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm grub efibootmgr os-prober ntfs-3g"
 	arch-chroot /mnt /bin/bash -c "echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub"
