@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd ~/
+rm -rf arch-config
 git clone https://github.com/ayunierto/arch-config.git
 cp -r ~/arch-config/.* ~/
 
@@ -13,21 +14,21 @@ cp -r ~/arch-config/.* ~/
 #paru -S google-chrome
 
 # Instalacion de terminal zsh
-sudo pacman -S zsh
+sudo pacman -S --noconfirm zsh
 
 # Agregando la terminal zsh al usuario hawk
 sudo usermod --shell /usr/bin/zsh $USER
 
 # Plugins para mejorar zsh
-sudo pacman -S zsh-syntax-highlighting zsh-autosuggestions # Agregando plugins a zsh
+sudo pacman -S --noconfirm zsh-syntax-highlighting zsh-autosuggestions # Agregando plugins a zsh
 
 # Instalar locate pra saber ubicacion de los archivos en el sistema
-#sudo pacman -S locate
-#sudo updatedb # Actualizar base de datos de locate
-#sudo mkdir -p /usr/share/zsh-sudo # Agregando carpeta de configuracion para zsh-sudo
-#sudo chown hawk:hawk /usr/share/zsh-sudo # Cambiando permisos a la carpeta 
-#cd /usr/share/zsh-sudo
-#wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh # Descargando plugin
+sudo pacman -S --noconfirm locate
+sudo updatedb # Actualizar base de datos de locate
+sudo mkdir -p /usr/share/zsh-sudo # Agregando carpeta de configuracion para zsh-sudo
+sudo chown $USER:$USER /usr/share/zsh-sudo # Cambiando permisos a la carpeta 
+cd /usr/share/zsh-sudo
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh # Descargando plugin
 
 # Instalar lsd y bat para mejorar la experiencia de de los comandos ls y cat
 sudo pacman -S lsd bat
