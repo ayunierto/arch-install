@@ -1,5 +1,6 @@
 #!/bin/bash
-source selected_partitions.sh
+
+source format_partitions.sh
 
 load_partitions() {
     # Obtener las particiones
@@ -14,6 +15,9 @@ list_partitions() {
     echo "============================="
     echo " Seleccione las particiones"
     echo "============================="
+    echo
+    lsblk
+    echo
 
     # Mostrar lista de particiones
     for i in "${!options[@]}"; do
@@ -23,7 +27,7 @@ list_partitions() {
     echo
 }
 
-select_partitions() {
+menu_partitions() {
 
     load_partitions
 
@@ -39,6 +43,7 @@ select_partitions() {
 
         # Validar la opción ingresada
         if [[ $root_part -ge 1 && $root_part -le ${#options[@]} ]]; then
+
             if [[ $root_part -eq ${#options[@]} ]]; then
                 break 2
             fi
@@ -55,6 +60,7 @@ select_partitions() {
                 fi
             done
 			
+            # Seleccionar el nombre de la particion
 			root_part=(${options[$root_part]})
 
             # Reemplazar el array original con el nuevo
@@ -87,6 +93,7 @@ select_partitions() {
                         fi
                     done
 					
+                    # Seleccionar el nombre de la particion
 					boot_part=(${options[$boot_part]})
 
                     # Reemplazar el array original con el nuevo
@@ -96,64 +103,62 @@ select_partitions() {
                     # Tercera peticion
                     # Particion swap
                     # =================================================================
-                    read -p "Desea utilizart particion para swap? (yes/no/y/n): " confirm
+					while true; do
 
-		            # Transdormamos las respuestas en minusculas
-                    confirm=$(echo "$confirm" | tr '[:upper:]' '[:lower:]')
-                    case "$confirm" in
-                    yes | y)
-						while true; do
-			    		
-							list_partitions
+                        read -p "Desea utilizar particion para swap? (yes/no/y/n): " confirm
 
-                            read -p "Selecciona la particion para swap 'swap' [1-${#options[@]}]: " swap_part
+		                # Transdormamos las respuestas en minusculas
+                        confirm=$(echo "$confirm" | tr '[:upper:]' '[:lower:]')
 
-                            # Validar la opción ingresada
-                            if [[ $swap_part -ge 1 && $swap_part -le ${#options[@]} ]]; then
-                                if [[ $swap_part -eq ${#options[@]} ]]; then
+                        case "$confirm" in
+                            yes | y)
+                                list_partitions
+                                read -p "Selecciona la particion para swap 'swap' [1-${#options[@]}]: " swap_part
+
+                                # Validar la opción ingresada
+                                if [[ $swap_part -ge 1 && $swap_part -le ${#options[@]} ]]; then
+                                    if [[ $swap_part -eq ${#options[@]} ]]; then
                                     break 4
+                                    fi
+                
+                                    # Decrementando en 1 para que coincida con el indice del arreglo
+                                    swap_part=$((swap_part - 1))
+
+                                    # Elminar la particion seleccionada del array de opciones
+                                    new_array=()
+                                
+                                    for ((i = 0; i < ${#options[@]}; i++)); do
+                                        if [ $i -ne $swap_part ]; then
+                                        new_array+=("${options[$i]}")
+                                        fi
+                                    done
+                                    
+                                    swap_part=(${options[$swap_part]})
+
+                                    # Reemplazar el array original con el nuevo
+                                    options=("${new_array[@]}")
+
+                                    format_partitions $root_part $boot_part $swap_part
+                                    read esperar
+
+                                else
+                                # Opcion no valida de la 3ra peticion
+                                echo "Respuesta inválida. Por favor intenta de nuevo."
+                                sleep 2
                                 fi
-				
-								# Decrementando en 1 para que coincida con el indice del arreglo
-                     			swap_part=$((swap_part - 1))
-
-                    			# Elminar la particion seleccionada del array de opciones
-                    			new_array=()
-                    		
-								for ((i = 0; i < ${#options[@]}; i++)); do
-                        			if [ $i -ne $swap_part ]; then
-                            		  new_array+=("${options[$i]}")
-                            		fi
-								done
-				  				
-								swap_part=(${options[$swap_part]})
-
-								# Reemplazar el array original con el nuevo
-                    			options=("${new_array[@]}")
-
-								selected_partitions	$root_part $boot_part $swap_part
-								read esperar
-
-                            else
-                               # Opcion no valida de la 3ra peticion
-                               echo "Respuesta inválida. Por favor intenta de nuevo."
-                               sleep 2
-                           fi
-						
-					   done 
-                        ;;
-                    no | n)
-						echo
-						echo "Las particiones seleccionadas son:  $root_part, $boot_part"
-                        sleep 4
-						read esperar
-                        break 
-                        ;;
-                    *)
-                        echo "Respuesta inválida. Por favor responde (yes/no/y/n)."
-						sleep 2
-                        ;;
-                    esac
+                                ;;
+                            no | n)
+                                echo
+                                format_partitions $root_part $boot_part
+                                sleep 4
+                                read esperar
+                                ;;
+                            *)
+                                echo "Respuesta inválida. Por favor responde (yes/no/y/n)."
+                                sleep 2
+                                ;;
+                        esac
+				    done 
 
                 else
 

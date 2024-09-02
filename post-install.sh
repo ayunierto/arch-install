@@ -9,7 +9,7 @@
 sudo pacman -Syu
 
 # Instalar gestor de ventanas y de inicio de sesion
-sudo pacman -S awesome
+sudo pacman -S --noconfirm awesome
 sudo pacman -S lightdm lightdm-gtk-greeter
 sudo systemctl enable lightdm
 
