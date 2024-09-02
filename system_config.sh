@@ -49,7 +49,7 @@ system_config() {
 	arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm alsa-utils pulseaudio pulseaudio-alsa pavucontrol"
 	arch-chroot /mnt /bin/bash -c "usermod -aG audio $username"
 	
-	arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm kitty neofetch zip unzip tar p7zip wget zsh zsh-syntax-highlighting zsh-autosuggestions lsd bat"
+	arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm kitty neofetch zip unzip tar p7zip wget zsh zsh-syntax-highlighting zsh-autosuggestions lsd bat neovim firefox"
 	arch-chroot /mnt /bin/bash -c "usermod --shell /usr/bin/zsh $username"
 
 }
