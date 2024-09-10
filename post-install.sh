@@ -25,7 +25,7 @@ sudo pacman -S --noconfirm locate
 sudo updatedb # Actualizar base de datos de locate
 # Instalar lsd y bat para mejorar la experiencia de de los comandos ls y cat
 # Se agregaron aliases en la configuracion de la zsh para remplazar ls y cat por lsd y bat
-sudo pacman -S lsd bat
+sudo pacman -S --noconfirm lsd bat
 
 # Instalacion de powerlevel10k. tema para la terminal zsh
 # la configuracion ya esta agregada en el archivo .zshrc
@@ -58,4 +58,4 @@ rm -rf ~/arch-config
 git clone https://github.com/ayunierto/arch-config.git
 cp -rf ~/arch-config/.* ~/
 
-
+sudo pacman -S vlc --noconfirm
